@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+:root {
+    --White: hsl(0, 100%, 100%);
+    --Grey-500: hsl(0, 0%, 63%);
+    --Grey-800: hsl(0, 0%, 27%);
+    --Black: hsl(0, 0%, 0%);
+    --Paragraph: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "League Spartan", sans-serif;
+    font-size: var(--Paragraph);
+}
+
+.container {
+    background-color: red;
+    position: relative;
+}
+
+/* Navbar */
+.container nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    position: absolute;
+    padding: 3rem;
+}
+
+nav .open-menu,
+.nav-links .close-menu {
+    display: none;
+}
+
+nav .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    color: var(--White);
+    text-transform: lowercase;
+    position: relative;
+}
+
+.nav-links ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--White);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -0.5rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links ul li a:hover::after {
+    width: 60%;
+}
+
+
+
+/* ---------- Mobile Responsive ---------- */
+@media screen and (max-width: 768px) {
+
+    /* Navbar */
+    nav .open-menu, .nav-links .close-menu {
+        display: block;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    nav .open-menu {
+        position: absolute;
+    }
+
+    nav .logo {
+        margin: auto;
+    }
+
+    nav .nav-links {
+        background-color: var(--White);
+        width: 100%;
+        height: 100px;
+        position: fixed;
+        left: 0;
+        top: -100px;
+        opacity: 0;
+        transition: top 0.5s ease, opacity 0.3s ease;
+        padding-left: 3rem;
+        z-index: 5;
+    }
+
+    nav .nav-links.open {
+        top: 0;
+        opacity: 1;
+    }
+
+    .nav-links ul li a {
+        color: var(--Black);
+    }
+
+    .nav-links ul li a::after {
+        background-color: var(--Black);
+    }
+
+    .container .overlay {
+        content: '';
+        position: fixed;
+        background-color: var(--Black);
+        width: 100%;
+        height: 100vh;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .container .overlay.active {
+        opacity: 0.5;
+        pointer-events: all;
+    }
+}
