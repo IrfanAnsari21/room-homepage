@@ -21,8 +21,10 @@ body {
 }
 
 .container {
-    background-color: red;
+    background-color: var(--White);
     position: relative;
+    max-width: 1440px;
+    margin: auto;
 }
 
 /* Navbar */
@@ -33,6 +35,7 @@ body {
     gap: 3rem;
     position: absolute;
     padding: 3rem;
+    z-index: 10;
 }
 
 nav .open-menu,
@@ -76,13 +79,100 @@ nav .nav-links {
     width: 60%;
 }
 
+/* Slider */
+.hero {
+    width: 100%;
+    height: 31rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero .slide {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    transition: transform 1.5s ease;
+}
+
+.slide .image-container {
+    width: 57%;
+    height: 100%;
+    position: relative;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+}
+
+.slide .text-container {
+    width: 43%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0 5rem;
+}
+
+.slide .text-container .title {
+    font-size: 2.5rem;
+}
+
+.slide .text-container .description {
+    color: var(--Grey-500);
+    line-height: 1.5rem;
+}
+
+.slide .text-container .shop-btn {
+    border: none;
+    background: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6rem;
+    font-family: "League Spartan", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.slide .text-container .shop-btn:hover {
+    opacity: 50%;
+}
+
+.slide-btns {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 57%;
+    /* transform: translateX(100%); */
+}
+
+.slide-left,
+.slide-right {
+    border: none;
+    background-color: var(--Black);
+    padding: 1.5rem;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 50%;
+    }
+}
+
+
 
 
 /* ---------- Mobile Responsive ---------- */
 @media screen and (max-width: 768px) {
 
     /* Navbar */
-    nav .open-menu, .nav-links .close-menu {
+    nav .open-menu,
+    .nav-links .close-menu {
         display: block;
         border: none;
         background: none;
