@@ -170,6 +170,15 @@ nav .nav-links {
     }
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
 /* About section */
 .about {
     display: flex;
@@ -369,7 +378,7 @@ nav .nav-links {
 
     .hero .slide,
     .slide .text-container .shop-btn,
-    .nav .nav-links {
+    nav .nav-links {
         transition: none;
     }
 }

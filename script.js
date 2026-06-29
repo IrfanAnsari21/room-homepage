@@ -1,37 +1,41 @@
+// Navbar
 const navLinks = document.querySelector("nav .nav-links");
 const openMenu = document.querySelector("nav .open-menu");
 const closeMenu = document.querySelector("nav .close-menu");
 const overlay = document.querySelector(".overlay");
 
-openMenu.addEventListener("click", () => {
+const openNav = () => {
     navLinks.classList.add("open");
     overlay.classList.add("active");
-});
+    openMenu.setAttribute("aria-expanded", "true");
+};
 
-closeMenu.addEventListener("click", () => {
+const closeNav = () => {
     navLinks.classList.remove("open");
     overlay.classList.remove("active");
-});
+    openMenu.setAttribute("aria-expanded", "false");
+};
 
-overlay.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    overlay.classList.remove("active");
-});
+openMenu.addEventListener("click", openNav);
+closeMenu.addEventListener("click", closeNav);
+overlay.addEventListener("click", closeNav);
 
 
 // Slides
 const slides = document.querySelectorAll(".slide");
-var counter = 0;
+const slideLeft = document.querySelector(".slide-left");
+const slideRight = document.querySelector(".slide-right");
+let counter = 0;
 
 slides.forEach((slide, index) => {
-    slide.style.left = `${index * 100}%`
+    slide.style.left = `${index * 100}%`;
 });
 
 const prevSlide = () => {
     if (counter > 0) {
         counter--
-    } else if (counter === 0) {
-        counter = slides.length -1;
+    } else {
+        counter = slides.length - 1;
     }
     slideImage();
 }
@@ -45,8 +49,24 @@ const nextSlide = () => {
     slideImage();
 }
 
+const slideTitles = [...slides].map(s => s.querySelector(".title").textContent);
+const slideStatus = document.getElementById("slide-status");
+
 const slideImage = () => {
     slides.forEach((slide) => {
         slide.style.transform = `translateX(-${counter * 100}%)`
-    })
-}
+    });
+
+    // Announce to screen readers
+    slideStatus.textContent = `Slide ${counter + 1} of ${slides.length}: ${slideTitles[counter]}`;
+};
+
+slideLeft.addEventListener("click", prevSlide);
+slideRight.addEventListener("click", nextSlide);
+
+
+// Keyboard arrow support:-
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "ArrowRight") nextSlide();
+});
